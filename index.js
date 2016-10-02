@@ -35,13 +35,13 @@ StonehillSensorPlatform.prototype = {
 
     var foundAccessories = [];
 
-    var accessory = new StonehillAccessory(that.log, {id: 1, name: "Outdoor", humidity: false});
+    var accessory = new StonehillAccessory(that.log, that.server, {id: 1, name: "Outdoor", humidity: false});
     foundAccessories.push(accessory);
 
-    var accessory = new StonehillAccessory(that.log, {id: 2, name: "Basement", humidity: true});
+    var accessory = new StonehillAccessory(that.log, that.server, {id: 2, name: "Basement", humidity: true});
     foundAccessories.push(accessory);
 
-    var accessory = new StonehillAccessory(that.log, {id: 3, name: "Living room", humidity: true});
+    var accessory = new StonehillAccessory(that.log, that.server, {id: 3, name: "Living room", humidity: true});
     foundAccessories.push(accessory);
 
 
@@ -56,12 +56,13 @@ StonehillSensorPlatform.prototype = {
   }  
 };
 
-function StonehillAccessory(log, device) {
+function StonehillAccessory(log, server, device) {
   this.log = log;
   this.id = device.id;
   this.name = device.name;
   this.humidity = device.humidity;
   this.manufacturername = "Made by Fredde";
+  this.server = server;
 }
 
 StonehillAccessory.prototype = {
@@ -74,6 +75,7 @@ StonehillAccessory.prototype = {
     var sensor = this;
 
     var endPoint = 'http://' + sensor.server + ':5000/temperature/current';
+    
     request(endPoint, function (error, response, body) {
 
       if (error) {

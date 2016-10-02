@@ -14,14 +14,16 @@ module.exports = function(homebridge) {
 }
 
 
-function StonehillSensorPlatform(log, config) {
+function StonehillSensorPlatform(log, config, api) {
   log("homebridge-stonehill Init");
-  log(config);
-  this.log = log;
-  this.server = config.server;
-
   
+  this.config = config || {};
+
+  this.log = log;
+  this.server = this.config.server || "No server provided";
+
   this.log("Stonehill Platform Plugin Version " + this.getVersion());
+  this.log("Will attempt to collect data from ", this.server);
   
 }
 

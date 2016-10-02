@@ -4,8 +4,10 @@ This plugin exposes information from a REST endpoint as temperature and humidity
 ## Install
 	1. Install homebridge using: npm install -g homebridge
 	2. Install this plugin using: git clone https://github.com/fredrikholmen/homebridge-stonehill.git
-	3. Update your configuration file. See the sample below.
-	4. Start homebridge using: homebridge -D -P ../homebridge-stonehill
+	3. Go to the homebridge-stonehill directory
+	4. Run: NPM install
+	5. Update your configuration file. See the sample below.
+	6. Start homebridge using: homebridge -D -P ../homebridge-stonehill
 
 ## Configuration
 

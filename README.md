@@ -28,8 +28,11 @@ Example config.json:
 	        "name": "Stonehill",
 	        "server": "<Your local REST server IP>"
 	        }
-	]
+		]
 	}
 
 ## Remarks
-The Homebridge package loads all plugins starting with homebridge- in its directory name. However, to be found you must point it to the directory that holds your plugin directories.
+The Homebridge package loads all plugins starting with "homebridge-" in its directory name. However, for the plugin to be found you must point it to the directory that holds your plugin directories.
+
+## Credit
+Thank you to [Luca Critelli](https://github.com/lucacri) and his [http-temperature-humidity plugin](https://github.com/lucacri/homebridge-http-temperature-humidity) that I borrowed heavily from to set up the accessory. 

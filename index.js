@@ -10,25 +10,25 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   
-  homebridge.registerPlatform("homebridge-stonehill", "Stonehill", StonehillSensPlatform, true);
+  homebridge.registerPlatform("homebridge-stonehill", "Stonehill", StonehillSensorPlatform, true);
 }
 
 
-function StonehillSensPlatform(log, config) {
+function StonehillSensorPlatform(log, config) {
   log("homebridge-stonehill Init");
   log(config);
   this.log = log;
-  this.server = "raspberryPI.local";
+  this.server = config.server;
 
   
   this.log("Stonehill Platform Plugin Version " + this.getVersion());
   
 }
 
-StonehillSensPlatform.prototype = {
+StonehillSensorPlatform.prototype = {
 
   accessories: function(callback) {
-    this.log("Fetching Sensors...");
+    this.log("Creating sensors...");
     var that = this;
 
     var foundAccessories = [];
@@ -65,33 +65,35 @@ function StonehillAccessory(log, device) {
 StonehillAccessory.prototype = {
 
   getStateHumidity: function(callback){    
-  callback(null, this.humidity);
-    },
+    callback(null, this.humidity);
+  },
 
   getState: function (callback) {
-    var that = this;
-    request('http://192.168.1.4:5000/temperature/current', function (error, response, body) {
+    var sensor = this;
+
+    var endPoint = 'http://' + sensor.server + ':5000/temperature/current';
+    request(endPoint, function (error, response, body) {
 
       if (error) {
-        this.log("HTTP function failed");
+        sensor.log("HTTP function failed");
         callback(error);
       } else {
-        that.log('HTTP power function succeeded!');
+        sensor.log('HTTP power function succeeded!');
         var info = JSON.parse(body);
         
-        temperatureService.setCharacteristic(Characteristic.CurrentTemperature, info[that.id-1].temp);
+        temperatureService.setCharacteristic(Characteristic.CurrentTemperature, info[sensor.id-1].temp);
 
-        if(that.humidity !== false)
-          humidityService.setCharacteristic(Characteristic.CurrentRelativeHumidity, info[that.id-1].hum);
+        if(sensor.humidity !== false)
+          humidityService.setCharacteristic(Characteristic.CurrentRelativeHumidity, info[sensor.id-1].hum);
 
-        that.log(body);
-        that.log(info);
+        // sensor.log(body);
+        // sensor.log(info);
 
-        that.temperature = info[that.id-1].temp;
-        if(that.humidity !== false)
-          that.humidity = info[that.id-1].hum;
+        sensor.temperature = info[sensor.id-1].temp;
+        if(sensor.humidity !== false)
+          sensor.humidity = info[sensor.id-1].hum;
 
-        callback(null, info[that.id-1].temp);
+        callback(null, info[sensor.id-1].temp);
       }
     })
 
@@ -102,7 +104,7 @@ StonehillAccessory.prototype = {
         callback(); // success
       },
 
-  getServices: function () {
+      getServices: function () {
         var services = [],
         informationService = new Service.AccessoryInformation();
 

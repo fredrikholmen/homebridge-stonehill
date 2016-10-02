@@ -10,7 +10,7 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   
-  homebridge.registerPlatform("homebridge-stonehill", "Stonehill", StonehillSensorPlatform, true);
+  homebridge.registerPlatform("homebridge-stonehill", "Stonehill", StonehillSensorPlatform, false);
 }
 
 

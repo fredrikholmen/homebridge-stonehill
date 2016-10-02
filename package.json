@@ -1,0 +1,29 @@
+{
+  "name": "homebridge-stonehill",
+  "version": "0.0.2",
+  "description": "Temperature and humidity platform plugin for Homebridge",
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fredrikholmen/homebridge-stonehill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fredrikholmen/homebridge-stonehill/issues"
+  },
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "dependencies": {},
+  "homepage": "https://github.com/fredrikholmen/homebridge-stonehill",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Fredrik Holmén"
+}

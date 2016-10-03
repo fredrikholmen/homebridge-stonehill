@@ -1,5 +1,5 @@
 # homebridge-stonehill
-This plugin exposes information from a REST endpoint as temperature and humidity characteristics. It's helpful for understanding how to roll-up several accessories in one platform.
+This plugin exposes information to HomeKit from a REST endpoint as temperature and humidity characteristics. It's helpful for understanding how to roll-up several accessories in one platform.
 
 ## Install
 	1. Install homebridge using: npm install -g homebridge
@@ -15,7 +15,7 @@ Example config.json:
 
 	{
 	    "bridge": {
-	        "name": "<Bridg name>",
+	        "name": "<bridge name>",
 	        "username": "<username>",
 	        "port": <port>,
 	        "pin": "<pin>"
